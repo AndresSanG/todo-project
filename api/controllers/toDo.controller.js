@@ -51,9 +51,8 @@ exports.getToDoById = async (req, res) => {
 
 exports.createToDo = async (req, res) => {
   try {
-    const { title, content } = req.body;
+    const { content } = req.body;
     const newToDo = await ToDo.create({
-      title: title, // dbColumn: valueToInsert
       content: content
     });
 
@@ -70,7 +69,7 @@ exports.createToDo = async (req, res) => {
 exports.updateToDo = async (req, res) => {
   try {
     const { id } = req.params;
-    const data = filterObj(req.body, 'title', 'content', 'author'); // { title } | { title, author } | { content }
+    const data = filterObj(req.body, 'content'); 
 
     const toDo = await ToDo.findOne({
       where: { id: id, status: 'active' }
@@ -84,7 +83,7 @@ exports.updateToDo = async (req, res) => {
       return;
     }
 
-    await toDo.update({ ...data }); // .update({ title, author })
+    await toDo.update({ ...data }); 
 
     res.status(204).json({ status: 'success' });
   } catch (error) {

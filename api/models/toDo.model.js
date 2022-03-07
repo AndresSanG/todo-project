@@ -10,10 +10,6 @@ const ToDo = sequelize.define('toDo', {
 		autoIncrement: true,
 		allowNull: false,
 	},
-	title: {
-		type: DataTypes.STRING(100),
-		allowNull: false, // NOT NULL
-	},
 	content: {
 		type: DataTypes.STRING(255),
 		allowNull: false,

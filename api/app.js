@@ -20,6 +20,8 @@
 
 const express = require('express');
 
+const cors = require('cors')
+
 const {toDoRouter} = require('./routes/toDo.routes');
 
 const {sequelize} = require('./util/database')
@@ -27,9 +29,9 @@ const {sequelize} = require('./util/database')
 const app = express();
 
 app.use(express.json());
-// app.use(cors());
+app.use(cors());
 
-app.use('/api/v1/toDo',toDoRouter);
+app.use('/api/v1/todos',toDoRouter);
 
 sequelize
     .sync()

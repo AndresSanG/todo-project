@@ -17,3 +17,25 @@
 
 // Install cors library (npm i cors)
 // app.use(cors())
+
+const express = require('express');
+
+const {toDoRouter} = require('./routes/toDo.routes');
+
+const {sequelize} = require('./util/database')
+
+const app = express();
+
+app.use(express.json());
+// app.use(cors());
+
+app.use('/api/v1/toDo',toDoRouter);
+
+sequelize
+    .sync()
+    .then(()=>console.log('Data base synced'))
+    .catch((err)=>console.log(err));
+
+app.listen(4000,() =>{
+    console.log('express app runnig in port 4000')
+});
